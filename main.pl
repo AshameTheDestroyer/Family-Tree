@@ -96,17 +96,17 @@ isGrandsonOf(X, Y):- isMale(X), isGrandchildOf(X, Y).
 
 isGranddaughterOf(X, Y):- isFemale(X), isGrandchildOf(X, Y).
 
-isGrandGrandparentOf(X, Y):- isParentOf(X, Z), isGrandparentOf(Z, Y).
+isGreatGrandparentOf(X, Y):- isParentOf(X, Z), isGrandparentOf(Z, Y).
 
-isGrandGrandfatherOf(X, Y):- isMale(X), isGrandGrandparentOf(X, Y).
+isGreatGrandfatherOf(X, Y):- isMale(X), isGreatGrandparentOf(X, Y).
 
-isGrandGrandmotherOf(X, Y):- isFemale(X), isGrandGrandparentOf(X, Y).
+isGreatGrandmotherOf(X, Y):- isFemale(X), isGreatGrandparentOf(X, Y).
 
-isGrandGrandchildOf(X, Y):- isGrandGrandparentOf(Y, X).
+isGreatGrandchildOf(X, Y):- isGreatGrandparentOf(Y, X).
 
-isGrandGrandsonOf(X, Y):- isMale(X), isGrandGrandchildOf(X, Y).
+isGreatGrandsonOf(X, Y):- isMale(X), isGreatGrandchildOf(X, Y).
 
-isGranddGranddaughterOf(X, Y):- isFemale(X), isGrandGrandchildOf(X, Y).
+isGranddGranddaughterOf(X, Y):- isFemale(X), isGreatGrandchildOf(X, Y).
 
 isSiblingOf(X, Y):- isParentOf(Z, X), isParentOf(Z, Y).
 
@@ -123,3 +123,35 @@ isCousinOf(X, Y):- (isParentOf(Z, X), isUncleOf(Z, Y)); (isParentOf(Z, X), isAun
 isNephewOf(X, Y):- isSonOf(X, Z), isSiblingOf(Z, Y).
 
 isNieceOf(X, Y):- isDaughterOf(X, Z), isSiblingOf(Z, Y).
+
+isParentInLawOf(X, Y):- isParentOf(X, Z), isMarriedTo(Y, Z).
+
+isFatherInLawOf(X, Y):- isMale(X), isParentInLawOf(X, Y).
+
+isMotherInLawOf(X, Y):- isFemale(X), isParentInLawOf(X, Y).
+
+isGrandparentInLawOf(X, Y):- isGrandparentOf(X, Z), isMarriedTo(Y, Z).
+
+isGrandfatherInLawOf(X, Y):- isMale(X), isGrandparentInLawOf(X, Y).
+
+isGrandmotherInLawOf(X, Y):- isFemale(X), isGrandparentInLawOf(X, Y).
+
+isGreatGrandparentInLawOf(X, Y):- isGrandparentOf(X, Z), isMarriedTo(Y, Z).
+
+isGreatGrandfatherInLawOf(X, Y):- isMale(X), isGreatGrandparentInLawOf(X, Y).
+
+isGreatGrandmotherInLawOf(X, Y):- isFemale(X), isGreatGrandparentInLawOf(X, Y).
+
+isSiblingInLawOf(X, Y):- isSiblingOf(X, Z), isMarriedTo(Y, Z).
+
+isBrotherInLawOf(X, Y):- isMale(X), isSiblingInLawOf(X, Y).
+
+isSisterInLawOf(X, Y):- isFemale(X), isSiblingInLawOf(X, Y).
+
+isUncleInLawOf(X, Y):- isUncleOf(X, Z), isMarriedTo(Y, Z).
+
+isAuntInLawOf(X, Y):- isAuntOf(X, Z), isMarriedTo(Y, Z).
+
+isNephewInLawOf(X, Y):- isNephewOf(X, Z), isMarriedTo(Y, Z).
+
+isNieceInLawOf(X, Y):- isNieceOf(X, Z), isMarriedTo(Y, Z).
