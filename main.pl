@@ -152,6 +152,8 @@ isUncleInLawOf(X, Y):- isUncleOf(X, Z), isMarriedTo(Y, Z).
 
 isAuntInLawOf(X, Y):- isAuntOf(X, Z), isMarriedTo(Y, Z).
 
+isCousinInLawOf(X, Y):- isCousinOf(X, Z), isMarriedTo(Y, Z).
+
 isNephewInLawOf(X, Y):- isNephewOf(X, Z), isMarriedTo(Y, Z).
 
 isNieceInLawOf(X, Y):- isNieceOf(X, Z), isMarriedTo(Y, Z).
